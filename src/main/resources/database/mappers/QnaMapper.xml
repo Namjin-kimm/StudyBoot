@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.iu.home.board.qna.QnaMapper">
+	<select id="getList" resultType="QnaVO">
+		SELECT * 
+		FROM QNA 
+		<!-- WHERE CONTENTS LIKE CONCAT('%','contents','%') -->
+		ORDER BY NUM DESC
+		LIMIT #{startRow}, #{perPage}
+	</select>
+	
+	<insert id="setInfo" parameterType="QnaVO">
+		INSERT INTO QNA
+		VALUES(#{num}, #{writer}, #{title}, #{contents}, #{hit}, SYSDATE(), #{ref}, #{step}, #{depth})
+		ORDER BY NUM DESC
+	</insert>
+
+</mapper>
