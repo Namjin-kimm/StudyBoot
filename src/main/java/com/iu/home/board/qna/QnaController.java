@@ -9,7 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.iu.home.util.Pager;
 
@@ -37,9 +39,9 @@ public class QnaController {
 	}
 	
 	@PostMapping("write")
-	public String setInfo(QnaVO qnaVO)throws Exception{
+	public String setInfo(QnaVO qnaVO, RedirectAttributes redirectAttributes)throws Exception{
 		int result = qnaService.setInfo(qnaVO);
-		log.info("Result {}", result);
+		redirectAttributes.addAttribute("result", result);
 		return "redirect:./list";
 	}
 
