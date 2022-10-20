@@ -21,7 +21,7 @@
 	        <tbody>
 	            <c:forEach items="${list}" var="dto">
 	                    <tr class="parent" data-num="${dto.num}">
-	                        <td>${dto.num}</td>
+	                        <td><a href="./detail?num=${dto.num}">${dto.num}</a></td>
 	                        <td>${dto.writer}</td>
 	                        <td>${dto.title}</td>
 	                        <td>${dto.contents}</td>

@@ -6,5 +6,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.iu.home.board.qna.QnaVO" alias="QnaVO"/>
+		<typeAlias type="com.iu.home.board.qna.QnaFileVO" alias="QnaFileVO"/>
 	</typeAliases>
 </configuration>

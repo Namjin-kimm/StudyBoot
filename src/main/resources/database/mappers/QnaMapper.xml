@@ -12,10 +12,41 @@
 		LIMIT #{startRow}, #{perPage}
 	</select>
 	
-	<insert id="setInfo" parameterType="QnaVO">
+	<insert id="setInfo" parameterType="QnaVO" useGeneratedKeys="true" keyProperty="num">
 		INSERT INTO QNA
 		VALUES(#{num}, #{writer}, #{title}, #{contents}, #{hit}, SYSDATE(), #{ref}, #{step}, #{depth})
 		ORDER BY NUM DESC
 	</insert>
+	
+	<insert id="setAddFile" parameterType="QnaFileVO">
+		INSERT INTO QNAFILES (FILENUM, NUM, FILENAME, ORINAME)
+		VALUES (NULL, #{num}, #{fileName}, #{oriName})
+	</insert>
+	
+	<select id="getDetail" parameterType="QnaVO" resultMap="getDetail">
+		SELECT *
+		FROM QNA Q
+		INNER JOIN QNAFILES QF 
+		ON Q.NUM = QF.NUM
+		WHERE Q.NUM = #{num}
+	</select>
+	
+	<resultMap type="QnaVO" id="getDetail">
+		<id column="NUM" property="num"/>
+		<result column="WRITER" property="writer"/>
+		<result column="TITLE" property="title"/>
+		<result column="CONTENTS" property="contents"/>
+		<result column="HIT" property="hit"/>
+		<result column="REGDATE" property="regDate"/>
+		<result column="REF" property="ref"/>
+		<result column="STEP" property="step"/>
+		<result column="DEPTH" property="depth"/>
+		<collection property="qnaFileVOs" javaType="List" ofType="QnaFileVO">
+			<id column="FILENUM" property="fileNum"/>
+			<result column="NUM" property="num"/>
+			<result column="FILENAME" property="fileName"/>
+			<result column="ORINAME" property="oriName"/>
+		</collection>
+	</resultMap>
 
 </mapper>
