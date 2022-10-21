@@ -53,10 +53,10 @@ public class QnaService {
 		
 		for(MultipartFile f: qnaVO.getFiles()) {
 			// f가 비어있다면 예외를 강제로 발생시키겠다는 것
-			if(f.isEmpty()) {
-				log.info("-------- Exception 발생 --------");
-				throw new Exception();
-			}
+//			if(f.isEmpty()) {
+//				log.info("-------- Exception 발생 --------");
+//				throw new Exception();
+//			}
 			
 			if(!f.isEmpty()) {
 				log.info("FileName :" + f.getOriginalFilename());
