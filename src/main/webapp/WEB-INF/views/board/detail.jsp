@@ -31,7 +31,7 @@
 	                <td>${vo.step}</td>
 	                <td>${vo.depth}</td>
 					<c:forEach items="${vo.qnaFileVOs}" var="i">
-						<td><p><img src="${coutom.path}/${i.fileName}" alt="" style="width: 100px; height: 100px;"></p></td>
+						<td><p><img src="/file/qna/${i.fileName}" alt="" style="width: 100px; height: 100px;"></p></td>
 					</c:forEach>
 	            </tr>
 	            

@@ -14,6 +14,15 @@
 	<img src="./images/joyihyun.jpeg">
 	<a href="./qna/list">QNA</a>
 	
+	<div>
+		<a href="/fileDown/qna?fileNum=4">click</a>
+		<img alt="" src="/file/qna/joyihyun.jpg">
+		<img alt="" src="/file/notice/joyihyun2.jpg">
+		<a href="/fileDown/qna?fileNum=4">QnaDown</a>
+		<a href="/fileDown/notice?fileNum=4">NoticeDown</a>
+		<!-- 요청을 /file/** 로 보내지 않으면 WebConfig에서 가로채지 못하므로 Controller로 요청이 가게 됨 -->
+	</div>
+	
 	<script type="text/javascript">
 	
 	</script>

@@ -39,6 +39,7 @@ public class QnaService {
 	public int setInfo(QnaVO qnaVO)throws Exception{
 		
 		int result = qnaMapper.setInfo(qnaVO);
+//		realpath는 이제 쓸 필요 X
 //		String realpath = session.getServletContext().getRealPath("/static/upload/qna"); 
 		File file = new File(path);
 		
