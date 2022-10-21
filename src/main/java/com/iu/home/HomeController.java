@@ -19,6 +19,9 @@ public class HomeController {
 	@Value("${my.message.hi}")
 	private String message;
 	
+	@Value("${my.default}")
+	private String app;
+	
 //	private final Logger log = LoggerFactory.getLogger(HomeController.class);
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	
@@ -27,11 +30,16 @@ public class HomeController {
 	
 	@GetMapping("/")
 	public String home()throws Exception {
-		log.error("Error message");
-		log.warn("Warning message");
-		log.info("Info message");
-		log.debug("Debug message");
-		log.trace("Trace message");
+//		log.error("Error message");
+//		log.warn("Warning message");
+//		log.info("Info message");
+//		log.debug("Debug message");
+//		log.trace("Trace message");
+		
+		log.info("====================");
+		log.info("message {}", message);
+		log.info("default {}", app);
+		log.info("====================");
 		
 //		List<QnaVO> ar = qnaMapper.getList();
 		

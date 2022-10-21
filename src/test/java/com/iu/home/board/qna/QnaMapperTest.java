@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +23,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 class QnaMapperTest {
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
+	
+	@Value("${my.default}")
+	private String app; 
 	
 	@Autowired
 	private QnaMapper qnaMapper;
@@ -62,6 +66,7 @@ class QnaMapperTest {
 	@Test
 	void insertTest()throws Exception{
 //		for(int i = 0; i <=100; i++) {
+		log.info("=========== {} ===========");
 		QnaVO qnaVO = new QnaVO();
 		qnaVO.setWriter("jj");
 		qnaVO.setTitle("jj");
@@ -70,8 +75,8 @@ class QnaMapperTest {
 		qnaVO.setRef(0L);
 		qnaVO.setStep(0L);
 		qnaVO.setDepth(0L);
-		int result = qnaMapper.setInfo(qnaVO);
-		assertNotEquals(0, result);
+//		int result = qnaMapper.setInfo(qnaVO);
+//		assertNotEquals(0, result);
 //		}
 	}
 
