@@ -175,4 +175,7 @@ Temporary Items
 #*.wat
 #*.xhtml
 
+# my file
+application-secret.properties
+
 # End of https://www.toptal.com/developers/gitignore/api/macos,java,eclipse,web

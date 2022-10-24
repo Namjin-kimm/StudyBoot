@@ -63,7 +63,7 @@ class QnaMapperTest {
 //		assertNotEquals(0, ar.size());
 //	}
 	
-	@Test
+//	@Test
 	void insertTest()throws Exception{
 //		for(int i = 0; i <=100; i++) {
 		log.info("=========== {} ===========");
