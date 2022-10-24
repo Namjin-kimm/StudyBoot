@@ -16,10 +16,10 @@ import com.iu.home.board.qna.QnaVO;
 @Controller
 public class HomeController {
 	
-	@Value("${my.message.hi}")
+//	@Value("${my.message.hi}")
 	private String message;
 	
-	@Value("${my.default}")
+//	@Value("${my.default}")
 	private String app;
 	
 //	private final Logger log = LoggerFactory.getLogger(HomeController.class);

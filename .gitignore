@@ -177,5 +177,6 @@ Temporary Items
 
 # my file
 application-secret.properties
+application-prod.properties
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,java,eclipse,web
