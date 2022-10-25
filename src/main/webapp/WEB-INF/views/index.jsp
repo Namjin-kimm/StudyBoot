@@ -13,6 +13,14 @@
 	<h1>Index Page</h1>
 	<img src="./images/joyihyun.jpeg">
 	<a href="./qna/list">QNA</a>
+	<c:if test="${not empty sessionScope.member}">
+		<a href="../member/join">Join</a>
+		<a href="../member/logout">Logout</a>
+	</c:if>
+	<c:if test="${!not empty sessionScope.member}">
+		<a href="../member/join">Join</a>
+		<a href="../member/login">Login</a>
+	</c:if>
 	
 	<div>
 		<a href="/fileDown/qna?fileNum=4">click</a>
