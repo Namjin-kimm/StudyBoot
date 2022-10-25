@@ -13,7 +13,7 @@
 	
 	<div class="container col-lg-6">
 		<h1>Board Write Page</h1>
-		<form action="" method="post" enctype="multipart/form-data">
+		<form action="./write" method="post" enctype="multipart/form-data">
 			<div class="mb-3">
 				<label for="writer" class="form-label">Writer</label>
 				<input type="text" class="form-control" id="writer" aria-describedby="emailHelp" placeholder="Writer" name="writer">
@@ -27,11 +27,11 @@
 				<textarea class="form-control" id="contents" aria-describedby="emailHelp" name="contents"></textarea>
 			</div>
 			<div class="mb-3">
-				<label for="contents" class="form-label">Files</label>
+				<label for="files" class="form-label">Files</label>
 				<input type="file" name="files">
 			</div>
 			<div class="mb-3">
-				<label for="contents" class="form-label">Files</label>
+				<label for="files" class="form-label">Files</label>
 				<input type="file" name="files">
 			</div>
 				<input type="hidden" name="hit" value="0">
