@@ -36,6 +36,7 @@ public class FileManager extends AbstractView{
 		
 		//받아올 파일
 		File file = new File(base+path, qnaFileVO.getFileName());
+		log.info(qnaFileVO.getFileName());
 		
 		//한글 처리
 		response.setCharacterEncoding("UTF-8");

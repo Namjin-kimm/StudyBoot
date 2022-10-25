@@ -24,10 +24,8 @@ public class FileManagerController {
 		ModelAndView mv = new ModelAndView();
 		//DB에서 정보 조회
 		if(path.equals("qna")) {
-//			qnaFileVO = qnaService.getFileDetail();
+			qnaFileVO = qnaService.getFileDetail(qnaFileVO);
 		}
-		qnaFileVO.setFileName("joyihyun.jpg");
-		qnaFileVO.setOriName("joyihyun.jpg");
 		
 		mv.addObject("fileVO",qnaFileVO);
 		mv.addObject("path", path);
