@@ -165,14 +165,14 @@ $("#test3").click(function(){
 
 let count =3;
 $("#s1Add").click(function(){
-    // let add = '<option class="abc" id="abc'+count+'">'+count+'</option>';//문자열로 만들어 주는 것임 
-    // $("#s1").append(add);
-    // count++;
+    let add = '<option class="abc" id="abc'+count+'">'+count+'</option>';//문자열로 만들어 주는 것임 
+    $("#s1").append(add);
+    count++;
 
-    $("#s1Add").remove();
+    // $("#s1Add").remove();
 })
 
 // 자기 자신을 제외하고 자식들을 지우겠다
 $("#s1").click(function(){
-     $("#s1").empty();
+    //  $("#s1").empty();
  })
