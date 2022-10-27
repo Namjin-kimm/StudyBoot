@@ -79,5 +79,21 @@ public class QnaService {
 	public QnaFileVO getFileDetail(QnaFileVO qnaFileVO)throws Exception{
 		return qnaMapper.getFileDetail(qnaFileVO);
 	}
+	
+	public int setFileDelete(QnaFileVO qnaFileVO)throws Exception{
+		log.info("setFileDelete");
+		// fileName, oriName 불러오기
+		qnaFileVO = qnaMapper.getFileDetail(qnaFileVO);
+		String fileName = qnaFileVO.getFileName();
+		log.info("FileName : {}", fileName);
+		//DB에서 사진 삭제
+		int result = qnaMapper.setFileDelete(qnaFileVO);
+		log.info("Result : {}", result);
+		//HDD에서 사진 삭제
+		if(result > 0) {
+			fileManager.deleteFile(path, qnaFileVO);
+		}
+		return result;
+	}
 
 }

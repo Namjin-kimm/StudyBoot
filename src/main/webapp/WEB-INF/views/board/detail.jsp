@@ -38,6 +38,7 @@
 	            
 	        </tbody>
 	    </table>
+		<a href="./update?num=${vo.num}" type="button" class="btn btn-primary">수정하기</a>
 	</div>
 
 </body>

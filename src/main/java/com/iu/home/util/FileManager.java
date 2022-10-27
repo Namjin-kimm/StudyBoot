@@ -93,5 +93,11 @@ public class FileManager extends AbstractView{
 		
 		return fileName;
 	}
+	
+	//HDD에서 파일 삭제
+	public boolean deleteFile(String path, QnaFileVO qnaFileVO)throws Exception{
+		File file = new File(path, qnaFileVO.getFileName());
+		return file.delete();
+	}
 
 }

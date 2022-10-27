@@ -50,9 +50,13 @@
 	</resultMap>
 	
 	<select id="getFileDetail" parameterType="QnaFileVO" resultType="QnaFileVO">
-		SELECT FILENAME, ORINAME
+		SELECT *
 		FROM QNAFILES
 		WHERE FILENUM = #{fileNum}
 	</select>
+	
+	<delete id="setFileDelete" parameterType="QnaFileVO">
+	 	DELETE FROM QNAFILES WHERE FILENUM = #{fileNum}
+	</delete>
 
 </mapper>

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.iu.home.util.Pager;
 
@@ -20,4 +21,7 @@ public interface QnaMapper {
 	public QnaVO getDetail(QnaVO qnaVO)throws Exception;
 	
 	public QnaFileVO getFileDetail(QnaFileVO qnaFileVO)throws Exception;
+	
+	public int setFileDelete(QnaFileVO qnaFileVO)throws Exception;
+	
 }

@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.iu.home.board.qna.QnaVO;
+
 @Controller
 @RequestMapping("/member/*")
 public class MemberContoller {
