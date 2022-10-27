@@ -10,12 +10,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Controller
 @RequestMapping("/member/*")
+@Slf4j
 public class MemberContoller {
 	
 	@Autowired
 	private MemberService memberService;
+	
+	@PostMapping("test")
+	@ResponseBody
+	public MemberVO setTest(MemberVO memberVO, String [] ar)throws Exception{
+		log.info("=========================");
+		log.info("ID : {}", memberVO.getId());
+		log.info("Name : {}", memberVO.getName());
+		for(String s : ar) {
+			log.info(s);
+		}
+		return memberVO;
+	}
 	
 	@GetMapping("logout")
 	public String logout(HttpSession session)throws Exception{
@@ -53,6 +68,10 @@ public class MemberContoller {
 	@ResponseBody
 	public Long getIdCheck(String id)throws Exception{
 		Long result = memberService.getIdCheck(id);
+		
+//		if(result ==0) {
+//			throw new Exception("테스트야 이 쉐키야!!");
+//		}
 		return result;
 	}
 

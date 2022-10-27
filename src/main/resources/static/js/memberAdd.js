@@ -110,3 +110,69 @@ $("#joinButton").click(function(){
     // }
 })
 
+$("#test").click(function(){
+    let id = "123";
+    let name = "iu";
+
+    $.post("./test", {
+        id:id, name:name
+    }, function(result){
+        console.log("Result : ", result);
+        // "{키:밸류}"
+        // 그냥 바로 Json형태로 오는 것이 아니라 문자열로 오게 되면 legacy에서 했던 것처럼 Jason으로 바꿔줘야 한다. -> JSON.parse()로
+        //result = JSON.parse(result);
+        console.log("Name : ", result.name);
+    })
+})
+
+$("#test2").click(function(){
+    let id = "abcd";
+    $.ajax({
+        type:"GET",
+        url:"idCheck",
+        data:{
+            id:id
+        },
+        sucess:function(data){
+            console.log("Data : ", data);
+        },
+        error:function(xhr,status,error){
+            console.log("Xhr : ", xhr);
+            console.log("Status : ", status);
+            console.log("Error : ", error);
+        }
+    });
+})
+
+$("#test3").click(function(){
+    let id = '1234';
+    let name = 'iu';
+    let ar = [1,2,3];
+    $.ajax({
+        type : "POST",
+        url : "test",
+        traditional:true, //배열을 전송할 때 사용, true
+        data:{
+            id:id,
+            name:name,
+            ar:ar
+        },
+        success:function(result){
+            console.log("result : ", result);
+        }
+    })
+})
+
+let count =3;
+$("#s1Add").click(function(){
+    // let add = '<option class="abc" id="abc'+count+'">'+count+'</option>';//문자열로 만들어 주는 것임 
+    // $("#s1").append(add);
+    // count++;
+
+    $("#s1Add").remove();
+})
+
+// 자기 자신을 제외하고 자식들을 지우겠다
+$("#s1").click(function(){
+     $("#s1").empty();
+ })

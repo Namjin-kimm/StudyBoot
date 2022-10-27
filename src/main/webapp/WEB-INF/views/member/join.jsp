@@ -46,6 +46,13 @@
 			<button type="button" id="joinButton" class="btn btn-primary">JOIN</button>
 		</div>
 	</form>
+
+	<!-- Post Button -->
+	<div>
+		<button id="test" type="button">Post Test</button>
+		<button id="test2" type="button">Ajax Get Test</button>
+		<button id="test3" type="button">Ajax Post Test</button>
+	</div>
 	
 	<!-- 약관 test -->
 	<div class="row justify-content-center mt-5">
@@ -73,6 +80,14 @@
 				약관3
 			</div>
 		</div>
+	</div>
+
+	<div>
+		<select id="s1">
+			<option value="">1</option>
+			<option value="">2</option>
+		</select>
+		<button id="s1Add" type="button">Add</button>
 	</div>
 
 </body>
