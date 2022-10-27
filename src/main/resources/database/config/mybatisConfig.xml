@@ -10,6 +10,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.iu.home.member.MemberVO" alias="MemberVO"/>
 		<typeAlias type="com.iu.home.member.RoleVO" alias="RoleVO"/>
 		
+		<typeAlias type="java.lang.String" alias="String"/>
+		<typeAlias type="java.lang.Long" alias="Long"/>
 		<typeAlias type="java.util.List" alias="List"/>
 	</typeAliases>
 </configuration>

@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 <c:import url="./temp/boot.jsp"></c:import>
 <link href="/css/test.css" rel="stylesheet">
+<script defer src="/js/test.js"></script>
 </head>
 <body>
 	<h1>Index Page</h1>
@@ -31,8 +32,14 @@
 		<!-- 요청을 /file/** 로 보내지 않으면 WebConfig에서 가로채지 못하므로 Controller로 요청이 가게 됨 -->
 	</div>
 	
-	<script type="text/javascript">
-	
-	</script>
+	<button id="btn">CLICK</button>
+
+	<button class="buttons">BTN1</button>
+	<button class="buttons">BTN2</button>
+	<button class="buttons">BTN3</button>
+
+	<div id="test">
+
+	</div>
 </body>
 </html>

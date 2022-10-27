@@ -33,5 +33,10 @@ public class MemberService {
 	public MemberVO getLogin(MemberVO memberVO)throws Exception{
 		return memberMapper.getLogin(memberVO);
 	}
+	
+	public Long getIdCheck(String id)throws Exception{
+		Long result = memberMapper.getIdCheck(id);
+		return result;
+	}
 
 }

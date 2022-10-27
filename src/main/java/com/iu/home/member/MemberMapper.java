@@ -5,6 +5,9 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface MemberMapper {
 	
+	// 아이디 중복확인
+	public Long getIdCheck(String id)throws Exception;
+	
 	// 회원가입시 등급 부여
 	public int setJoinRole(MemberVO memberVO)throws Exception;
 	

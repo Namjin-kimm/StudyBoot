@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -47,5 +48,12 @@ public class MemberContoller {
 		session.setAttribute("member", memberVO);
 		return "redirect:/";
 		}
+	
+	@PostMapping("idCheck")
+	@ResponseBody
+	public Long getIdCheck(String id)throws Exception{
+		Long result = memberService.getIdCheck(id);
+		return result;
+	}
 
 }
