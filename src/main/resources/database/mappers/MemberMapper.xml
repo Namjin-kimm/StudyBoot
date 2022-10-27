@@ -40,5 +40,6 @@
 	 	<select id="getIdCheck" parameterType="String" resultType="Long">
 	 		SELECT COUNT(ID) FROM MEMBER
 			WHERE ID = #{id}
+			<!-- SELECT ID FROM MEMBER WHERE ID = #{id} -->
 	 	</select>
 	</mapper>

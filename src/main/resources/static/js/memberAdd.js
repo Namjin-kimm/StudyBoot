@@ -31,9 +31,23 @@ let emailResult = false;
 
 // 유효성 체크
 $("#id").blur(function(){
-    idResult = nullCheck($("#id").val(), "#idm", "#idm2" , "ID");
+    let id = $("#id").val();
+    idResult = nullCheck(id, "#idm", "#idm2" , "ID");
     results[0] = idResult;
+    //단, id가 ''비어있지 않을 때                                      
+    //IDCHECK AJAX
+    $.get("./idCheck?id="+id, function(data){
+        console.log("data : ", data);
+        if(data=='0'){
+            $("#idm2").html("사용가능한 ID입니다");
+            results[0] = true;
+        }else{
+            $("#idm").html("중복된 ID입니다");
+            results[0] = false;
+        }
+    })
 })
+
 
 $("#pw").on({
     blur:function(){

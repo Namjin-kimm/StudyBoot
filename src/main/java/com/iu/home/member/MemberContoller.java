@@ -49,7 +49,7 @@ public class MemberContoller {
 		return "redirect:/";
 		}
 	
-	@PostMapping("idCheck")
+	@GetMapping("idCheck")
 	@ResponseBody
 	public Long getIdCheck(String id)throws Exception{
 		Long result = memberService.getIdCheck(id);
