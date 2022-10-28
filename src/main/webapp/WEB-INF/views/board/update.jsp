@@ -29,7 +29,7 @@
                 </div>
 			</div>
 
-            <div class="mb-3" id="fileList"></div>
+            <div class="mb-3" id="fileList" data-file-size="${vo.qnaFileVOs.size()}"></div>
             <c:forEach items="${vo.qnaFileVOs}" var="fileVO">
                 <p>${fileVO.oriName}
                     <button class="btn btn-danger deleteFile" data-fileNum="${fileVO.fileNum}" type="button">삭제</button>

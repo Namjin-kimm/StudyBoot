@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,18 +15,25 @@
 	
 	<div class="container col-lg-6">
 		<h1>Board Write Page</h1>
-		<form action="./write" method="post" enctype="multipart/form-data">
+		<%-- <form action="./write" method="post" enctype="multipart/form-data"> --%>
+		<form:form method="post" modelAttribute="qnaVO" enctype="multipart/form-data">
 			<div class="mb-3">
 				<label for="writer" class="form-label">Writer</label>
-				<input type="text" class="form-control" id="writer" aria-describedby="emailHelp" placeholder="Writer" name="writer">
+				<form:input path="writer" cssClass="form-control" id="writer"/>
+				<!-- <input type="text" class="form-control" id="writer" aria-describedby="emailHelp" placeholder="Writer" name="writer"> -->
+				<form:errors path="writer"></form:errors>
 			</div>
 			<div class="mb-3">
 				<label for="title" class="form-label">Title</label>
-				<input type="text" class="form-control" id="title" aria-describedby="emailHelp" placeholder="Title" name="title">
+				<form:input path="title" cssClass="form-control" id="title"/>
+				<!-- <input type="text" class="form-control" id="title" aria-describedby="emailHelp" placeholder="Title" name="title"> -->
+				<form:errors path="title"></form:errors>
 			</div>
 			<div class="mb-3">
 				<label for="contents" class="form-label">Contents</label>
-				<textarea class="form-control" id="contents" aria-describedby="emailHelp" name="contents"></textarea>
+				<form:textarea path="contents" cssClass="form-control" id="contents"/>
+				<!-- <textarea class="form-control" id="contents" aria-describedby="emailHelp" name="contents"></textarea> -->
+				<form:errors path="contents"></form:errors>
 			</div>
 
 			<div class="mb-3" id="fileAdd">
@@ -49,7 +57,8 @@
 				<input type="hidden" name="step" value="0">
 
 				<button class="btn btn-primary" type="submit">등록하기</button>
-		</form>
+		<%-- </form> --%>
+		</form:form>
 	</div>
 
 

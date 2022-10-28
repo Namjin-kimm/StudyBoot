@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +12,13 @@
 <script defer src="/js/test.js"></script>
 </head>
 <body>
-	<h1>Index Page</h1>
+	<h1>IndexPage</h1>
+	<h1><spring:message code="hi"></spring:message></h1>
+	<h1><spring:message code="test" text="code가 없을 때 출력하는 메세지"></spring:message></h1>
+	<c:if test="${not empty sessionScope.member}">
+		<h3><spring:message code="welcome" arguments="${member.name}"></spring:message></h3>
+		<h3><spring:message code="welcome2" arguments="${member.id}, ${member.name}" argumentSeparator=","></spring:message></h3>
+	</c:if>
 	<img src="./images/joyihyun.jpeg">
 	<a href="./qna/list">QNA</a>
 	<c:if test="${not empty sessionScope.member}">

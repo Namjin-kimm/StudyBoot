@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,44 +9,70 @@
 <title>Join</title>
 <c:import url="../temp/boot.jsp"></c:import>
 <script defer src="/js/util.js"></script>
-<script defer src="/js/memberAdd.js"></script>
+<!-- <script defer src="/js/memberAdd.js"></script> -->
 </head>
 <body>
-	<form action="join" method="post" id="joinForm">
+	<form:form modelAttribute="memberVO" method="post">
 		<div class="container col-lg-6">
 			<div class="mb-3">
 				<label for="id" class="form-label">ID</label>
-				<input type="text" class="form-control" id="id" aria-describedby="emailHelp" placeholder="ID" name="id">
+				<form:input path="id" cssClass="form-control" id="id" />
+				<!-- <input type="text" class="form-control" id="id" aria-describedby="emailHelp" placeholder="ID" name="id"> -->
 				<div id="idm" style="color: red;"></div>
 				<div id="idm2" style="color: blue;"></div>
+				<form:errors path="id"></form:errors>
 			</div>
 			<div class="mb-3">
 				<label for="pw" class="form-label">PW</label>
-				<input type="text" class="form-control" id="pw" aria-describedby="emailHelp" placeholder="PW" name="pw">
+				<form:password path="pw" cssClass="form-control" id="pw"/>
+				<!-- <input type="text" class="form-control" id="pw" aria-describedby="emailHelp" placeholder="PW" name="pw"> -->
 				<div id="pwm" style="color: red;"></div>
 				<div id="pwm2" style="color: blue;"></div>
+				<form:errors path="pw"></form:errors>
 			</div>
 			<div class="mb-3">
 				<label for="pwCheck" class="form-label">PW 확인</label>
-				<input type="text" class="form-control" id="pwCheck" aria-describedby="emailHelp" placeholder="PW Check">
+				<form:password path="pwCheck" cssClass="form-control" id="pwCheck"/>
+				<!-- <input type="text" class="form-control" id="pwCheck" aria-describedby="emailHelp" placeholder="PW Check"> -->
 				<div id="pwCheckm" style="color: red;"></div>
 				<div id="pwCheckm2" style="color: blue;"></div>
+				<form:errors path="pwCheck"></form:errors>
 			</div>
 			<div class="mb-3">
 				<label for="name" class="form-label">NAME</label>
-				<input type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="NAME" name="name">
+				<form:input path="name" cssClass="form-control" id="name"/>
+				<!-- <input type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="NAME" name="name"> -->
 				<div id="namem" style="color: red;"></div>
 				<div id="namem2" style="color: blue;"></div>
+				<form:errors path="name"></form:errors>
 			</div>
 			<div class="mb-3">
 				<label for="email" class="form-label">EMAIL</label>
-				<input type="text" class="form-control" id="email" aria-describedby="emailHelp" placeholder="EMAIL" name="email">
+				<form:input path="email" cssClass="form-control" id="email"/>
+				<!-- <input type="text" class="form-control" id="email" aria-describedby="emailHelp" placeholder="EMAIL" name="email"> -->
 				<div id="emailm" style="color: red;"></div>
 				<div id="emailm2" style="color: blue;"></div>
+				<form:errors path="email"></form:errors>
 			</div>
-			<button type="button" id="joinButton" class="btn btn-primary">JOIN</button>
+			<div class="mb-3">
+				<label for="age" class="form-label">AGE</label>
+				<form:input path="age" cssClass="form-control" id="age"/>
+				<!-- <input type="text" class="form-control" id="email" aria-describedby="emailHelp" placeholder="EMAIL" name="email"> -->
+				<div id="agem" style="color: red;"></div>
+				<div id="agem2" style="color: blue;"></div>
+				<form:errors path="age"></form:errors>
+			</div>
+			<div class="mb-3">
+				<label for="birth" class="form-label">BIRTH</label>
+				<form:input path="birth" cssClass="form-control" id="birth"/>
+				<!-- <input type="text" class="form-control" id="email" aria-describedby="emailHelp" placeholder="EMAIL" name="email"> -->
+				<div id="birthm" style="color: red;"></div>
+				<div id="birthm2" style="color: blue;"></div>
+				<form:errors path="birth"></form:errors>
+			</div>
+			<button type="submit" id="joinButton" class="btn btn-primary">JOIN</button>
 		</div>
-	</form>
+	</form:form>
 	
 	<!-- 약관 test -->
 	<div class="row justify-content-center mt-5">

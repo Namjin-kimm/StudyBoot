@@ -3,12 +3,15 @@ package com.iu.home.board.qna;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -37,15 +40,21 @@ public class QnaController {
 	}
 	
 	@GetMapping("write")
-	public String setInfo()throws Exception{
+	public String setInfo(@ModelAttribute QnaVO qnaVO)throws Exception{
 		return "board/write";
 	}
 	
 	@PostMapping("write")
-	public String setInfo(QnaVO qnaVO, RedirectAttributes redirectAttributes)throws Exception{
+	public ModelAndView setInfo(@Valid QnaVO qnaVO,BindingResult bindingResult, RedirectAttributes redirectAttributes, ModelAndView mv)throws Exception{
+		if(bindingResult.hasErrors()) {
+			log.info("------------ 검증 에러 발생 ------------");
+			mv.setViewName("board/write");
+			return mv;
+		}
 		int result = qnaService.setInfo(qnaVO);
 		redirectAttributes.addAttribute("result", result);
-		return "redirect:./list";
+		mv.setViewName("redirect:./list");
+		return mv;
 	}
 	
 	@GetMapping("detail")
