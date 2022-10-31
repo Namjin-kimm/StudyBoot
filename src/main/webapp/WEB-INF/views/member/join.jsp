@@ -9,7 +9,7 @@
 <title>Join</title>
 <c:import url="../temp/boot.jsp"></c:import>
 <script defer src="/js/util.js"></script>
-<!-- <script defer src="/js/memberAdd.js"></script> -->
+<script defer src="/js/memberAdd.js"></script>
 </head>
 <body>
 	<form:form modelAttribute="memberVO" method="post">
@@ -42,9 +42,10 @@
 				<label for="name" class="form-label">NAME</label>
 				<form:input path="name" cssClass="form-control" id="name"/>
 				<!-- <input type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="NAME" name="name"> -->
-				<div id="namem" style="color: red;"></div>
+				<div id="namem" style="color: red;">
+					<form:errors path="name"></form:errors>
+				</div>
 				<div id="namem2" style="color: blue;"></div>
-				<form:errors path="name"></form:errors>
 			</div>
 			<div class="mb-3">
 				<label for="email" class="form-label">EMAIL</label>
