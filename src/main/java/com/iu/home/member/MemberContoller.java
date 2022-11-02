@@ -89,13 +89,13 @@ public class MemberContoller {
 	}
 	
 	// 로그인
-	@PostMapping("login")
-	public String login(MemberVO memberVO, HttpSession session)throws Exception{
-		ModelAndView mv = new ModelAndView();
-		memberVO = memberService.getLogin(memberVO);
-		session.setAttribute("member", memberVO);
-		return "redirect:/";
-		}
+//	@PostMapping("login")
+//	public String login(MemberVO memberVO, HttpSession session)throws Exception{
+//		ModelAndView mv = new ModelAndView();
+//		memberVO = memberService.getLogin(memberVO);
+//		session.setAttribute("member", memberVO);
+//		return "redirect:/";
+//		}
 	
 	@GetMapping("idCheck")
 	@ResponseBody

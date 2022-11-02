@@ -1,7 +1,7 @@
 //파일 추가 갯수를 지정하는 변수
 let count = 0;
 
-
+//  update.js
 $("#fileAddButton").click(function(){
     console.log(count);
     if(flag){
@@ -24,6 +24,7 @@ $("#fileAddButton").click(function(){
     }
 })
 
+//지우기 버튼 이벤트 위임
 $("#fileAdd").on("click", ".del", function(){
     $(this).parent().remove();
     count--;
