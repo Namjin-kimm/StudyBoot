@@ -82,12 +82,15 @@ public class MemberVO implements UserDetails{
 		// 비밀번호 만료 여부
 		// true : 만료가 안됨
 		//false : 만료됨,로그인 안됨
-		return true;
+		return	true;
 	}
 	
 	//isEnabled
 	//계정 사용 여부
 	// true : 계정 활성화(계정 사용 가능)
 	// false: 계정 비활성화(계정 사용 불가, 로그인 불)
+	public boolean isEnabled() {
+		return true;
+	}
 
 }

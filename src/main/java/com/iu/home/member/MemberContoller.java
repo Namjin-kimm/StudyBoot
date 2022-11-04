@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -29,11 +30,12 @@ public class MemberContoller {
 	@Autowired
 	private MemberService memberService;
 	
-	@GetMapping("logout")
-	public String logout(HttpSession session)throws Exception{
-		session.invalidate();
-		return "redirect:/";
-	}
+//	@GetMapping("logout")
+//	public String logout(HttpSession session)throws Exception{
+//		log.info("==== 내가 만든 logout 메서드 ====");
+//		session.invalidate();
+//		return "redirect:/";
+//	}
 	
 	// 회원가입
 	@GetMapping("join")
@@ -83,25 +85,31 @@ public class MemberContoller {
 		return mv;
 	}
 	
-	@GetMapping("login")
-	public void login()throws Exception{
-		
+	@GetMapping("login") // Boolean 에 B를 대문자로 쓰는 이유는 null이 올 수 있기 때문에, Boolean은 참조타입
+	public void login(@RequestParam(defaultValue = "false", required = false) boolean error, String message, Model model)throws Exception{
+		if(error) {
+			model.addAttribute("msg", "ID 또는 PW를 확인하세요");
+		}
+		//Controller에서 받아서 jsp로 보내도 됨
 	}
 	
 	// 로그인
-//	@PostMapping("login")
-//	public String login(MemberVO memberVO, HttpSession session)throws Exception{
-//		ModelAndView mv = new ModelAndView();
-//		memberVO = memberService.getLogin(memberVO);
-//		session.setAttribute("member", memberVO);
-//		return "redirect:/";
-//		}
+	@PostMapping("login")
+	public String login()throws Exception{
+	log.info("======== Login post ========");
+		return "member/login";
+		}
 	
 	@GetMapping("idCheck")
 	@ResponseBody
 	public Long getIdCheck(String id)throws Exception{
 		Long result = memberService.getIdCheck(id);
 		return result;
+	}
+	
+	@GetMapping("mypage")
+	public void getMyPage()throws Exception {
+		
 	}
 
 }

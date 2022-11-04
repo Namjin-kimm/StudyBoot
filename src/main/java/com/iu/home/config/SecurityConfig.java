@@ -1,16 +1,36 @@
 package com.iu.home.config;
 
 import org.aspectj.weaver.ast.And;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+
+import com.iu.home.member.security.LoginFail;
+import com.iu.home.member.security.LoginSuccess;
+import com.iu.home.member.security.LogoutCustom;
+import com.iu.home.member.security.LogoutSuccessCustom;
 
 //@Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+	
+	@Autowired
+	private LoginSuccess loginSuccess;
+	
+	@Autowired
+	private LoginFail loginFail;
+	
+	@Autowired
+	private LogoutCustom logoutCustom;
+	
+	@Autowired
+	private LogoutSuccessCustom logoutSuccessCustom;
 	
 	@Bean
 	//public을 선언하면 default로 바꾸라는 메세지가 뜬다
@@ -49,13 +69,27 @@ public class SecurityConfig {
 //					.loginProcessingUrl("login")	//로그인을 진행할 form 태그의 action의 주소 지정, 필수는 아님
 					.passwordParameter("pw")	//패스워드 파라미터는 password이지만, 개발자가 다른 파라미터 이름을 사용할 때
 					.usernameParameter("id")	//id 파라미터는 username이지만, 개발자가 다른 파라미터 이름을 사용할 때
-					.defaultSuccessUrl("/")		//인증에 성공할 경우 요청할 URL
-					.failureUrl("/member/login")//인증에 실패했을 경우 요청할 URL
+//					.defaultSuccessUrl("/")		//인증에 성공할 경우 요청할 URL
+					.successHandler(loginSuccess)
+//					.failureUrl("/member/login?error=true&message=LoginFail")//인증에 실패했을 경우 요청할 URL
+					.failureHandler(loginFail)
 					.permitAll()
 					.and()
 				.logout()
+					.logoutUrl("/member/logout")
+					.logoutSuccessUrl("/")
+					.logoutSuccessHandler(logoutSuccessCustom)
+					.addLogoutHandler(logoutCustom)
+					.invalidateHttpSession(true)
+					.deleteCookies("JSESSIONID")
 					.permitAll();
 		return httpSecurity.build();
+	}
+	
+	//평문(Clear Text)을 암호화 시켜주는 객체 생성
+	@Bean
+	public PasswordEncoder getEncoder() {
+		return new BCryptPasswordEncoder();
 	}
 
 }

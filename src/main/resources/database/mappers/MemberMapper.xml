@@ -14,7 +14,7 @@
 			VALUES (#{id}, 3)
 		</insert>
 	
-	 	<select id="getLogin" parameterType="MemberVO" resultMap="loginResult">
+	 	<select id="getLogin" parameterType="String" resultMap="loginResult">
 		 	 SELECT M.*, R.*FROM 
 		     MEMBER M
 		     INNER JOIN
@@ -23,7 +23,7 @@
 		     INNER JOIN
 		     ROLE2 R 
 		     ON R.NUM = MR.NUM
-		     WHERE M.ID=#{id} AND M.PW=#{pw}
+		     WHERE M.ID=#{username}
 	 	</select>
 	 	
 	 	<resultMap type="MemberVO" id="loginResult">

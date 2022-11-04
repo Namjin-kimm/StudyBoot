@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,20 +16,32 @@
 	<h1>IndexPage</h1>
 	<h1><spring:message code="hi"></spring:message></h1>
 	<h1><spring:message code="test" text="code가 없을 때 출력하는 메세지"></spring:message></h1>
-	<c:if test="${not empty sessionScope.member}">
+	
+		<!-- 로그인 성공 -->
+	<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="Principal" var="member"/>
 		<h3><spring:message code="welcome" arguments="${member.name}"></spring:message></h3>
 		<h3><spring:message code="welcome2" arguments="${member.id}, ${member.name}" argumentSeparator=","></spring:message></h3>
-	</c:if>
-	<img src="./images/joyihyun.jpeg">
-	<a href="./qna/list">QNA</a>
-	<c:if test="${not empty sessionScope.member}">
-		<a href="../member/join">Join</a>
+		<a href="./member/mypage">myPage</a>
 		<a href="../member/logout">Logout</a>
-	</c:if>
-	<c:if test="${!not empty sessionScope.member}">
+	</sec:authorize>
+	
+	<sec:authorize access="!isAuthenticated()">
+		<!-- 로그인 전-->
+	<img src="./images/joyihyun.jpeg">
 		<a href="../member/join">Join</a>
 		<a href="../member/login">Login</a>
-	</c:if>
+	</sec:authorize>
+	
+	<sec:authorize url="/admin">
+		<a href="/admin">GO ADMIN</a>
+	</sec:authorize>
+	
+	<sec:authorize access="hasAnyRole('ADMIN', 'MANAGER')">
+		<a href="/manager">GO MANAGER</a>
+	</sec:authorize>
+	
+	<a href="./qna/list">QNA</a>
 	
 	<div>
 		<a href="/fileDown/qna?fileNum=4">click</a>
