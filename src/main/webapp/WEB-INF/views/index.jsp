@@ -23,7 +23,10 @@
 		<h3><spring:message code="welcome" arguments="${member.name}"></spring:message></h3>
 		<h3><spring:message code="welcome2" arguments="${member.id}, ${member.name}" argumentSeparator=","></spring:message></h3>
 		<a href="./member/mypage">myPage</a>
-		<a href="../member/logout">Logout</a>
+		<form id="outForm" action="./member/logout" method="post">
+			<sec:csrfInput/>
+			<a href="../member/logout">Logout</a>
+		</form>
 	</sec:authorize>
 	
 	<sec:authorize access="!isAuthenticated()">
@@ -31,6 +34,7 @@
 	<img src="./images/joyihyun.jpeg">
 		<a href="../member/join">Join</a>
 		<a href="../member/login">Login</a>
+		<a href="/oauth2/authorization/kakao">Kakao Login</a>
 	</sec:authorize>
 	
 	<sec:authorize url="/admin">
@@ -61,5 +65,11 @@
 	<div id="test">
 
 	</div>
+	
+	<script type="text/javascript">
+		$("#logout").click(function(){
+				$("#outForm").submit();
+		})
+	</script>
 </body>
 </html>

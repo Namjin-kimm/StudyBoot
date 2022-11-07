@@ -31,6 +31,9 @@
 				<div class="mb-3">
 					<input type="checkbox" name="rememberId" class="form-check-input" id="checkbox=">ID 기억하기
 				</div>
+				<div>
+					<input type="checkbox" name="rememberMe" class="form-check-input" id="exampleCheck2">Remember Me
+				</div>
 				<button type="submit" class="btn btn-primary">LOGIN</button>
 			</div>
 		</form>
