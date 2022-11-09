@@ -22,10 +22,12 @@
 	<sec:authentication property="Principal" var="member"/>
 		<h3><spring:message code="welcome" arguments="${member.name}"></spring:message></h3>
 		<h3><spring:message code="welcome2" arguments="${member.id}, ${member.name}" argumentSeparator=","></spring:message></h3>
+		<a href="https://kauth.kakao.com/oauth/logout?client_id=e757baf49d3cb7d82e62726cdcd7b177&logout_redirect_uri=http://localhost:81/member/logoutResult">Kakao Logout</a>
 		<a href="./member/mypage">myPage</a>
+		<a href="/member/delete">탈퇴</a>
 		<form id="outForm" action="./member/logout" method="post">
 			<sec:csrfInput/>
-			<a href="../member/logout">Logout</a>
+			<button type="submit">Logout</button>
 		</form>
 	</sec:authorize>
 	
@@ -69,6 +71,12 @@
 	<script type="text/javascript">
 		$("#logout").click(function(){
 				$("#outForm").submit();
+		})
+		
+		$("#kakao").click(function(){
+			$.get("https://developers.kakao.com/logout", function(){
+				location.reload();
+			}
 		})
 	</script>
 </body>

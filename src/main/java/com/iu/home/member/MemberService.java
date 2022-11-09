@@ -1,9 +1,17 @@
 package com.iu.home.member;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.client.RestTemplate;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -12,8 +20,40 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class MemberService {
 	
+	@Value("${social.kakao.admin}")
+	private String adiminKey;
+	
 	@Autowired
 	private MemberMapper memberMapper;
+	
+	public int setDelete(MemberVO memberVO)throws Exception{
+		int result =0;
+		RestTemplate restTemplate = new RestTemplate();
+		
+		//--Header
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED); //application/x-www-form-urlencoded
+		headers.add("Authorization","KakaoAK " + adiminKey);
+		
+		//--parameter
+		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+		params.add("target_id_type", "user_id");	// -d "target_id_type=user_id" 
+		params.add("target_id", memberVO.getId()); // -d "target_id=123456789" 
+
+		//--요청 객체
+		HttpEntity<MultiValueMap<String, String>> req = new HttpEntity<>(params,headers);
+		
+		//--전송 후 결과 처리
+		ResponseEntity<String> res	= restTemplate.postForEntity("https://kapi.kakao.com/v1/user/unlink", req, String.class);
+		
+		log.info("res => {}", res.getBody());
+		
+		if(res.getBody() != null) {
+			result =1;
+		}
+		
+		return result;
+	}
 	
 	//사용자 정의 검증 메서드
 	public boolean getMemberError(MemberVO memberVO, BindingResult bindingResult)throws Exception{

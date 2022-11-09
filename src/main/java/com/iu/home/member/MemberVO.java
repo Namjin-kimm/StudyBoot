@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -16,11 +17,13 @@ import org.hibernate.validator.constraints.Range;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.OAuth2AuthenticatedPrincipal;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import lombok.Data;
 
 @Data
-public class MemberVO implements UserDetails{
+public class MemberVO implements UserDetails, OAuth2User{
 	
 	@NotBlank(message = "ID쓸래 나랑 죽을래!!!")
 	private String id;
@@ -39,7 +42,15 @@ public class MemberVO implements UserDetails{
 	private Date birth;
 	private String pwCheck;
 	private boolean enabled;
+	
 	private List<RoleVO> roleVOs;
+	
+	//======== Social Login ==========
+	//Kakao, Naver, Google
+	private String social;
+	
+	//OAuth2User, Token등 정보 저장
+	private Map<String, Object> attributes;
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -92,5 +103,13 @@ public class MemberVO implements UserDetails{
 	public boolean isEnabled() {
 		return true;
 	}
+	
+	@Override
+	public Map<String, Object> getAttributes() {
+		// TODO Auto-generated method stub
+		return this.attributes;
+	}
+	
+	
 
 }
