@@ -29,6 +29,20 @@ public class QnaService {
 	
 	@Value("${app.upload.qna}")
 	private String path;
+	
+	public boolean summerFileDelete(String fileName)throws Exception{
+		fileName = fileName.substring(fileName.lastIndexOf("/") + 1);
+		QnaFileVO qnaFileVO = new QnaFileVO();
+		qnaFileVO.setFileName(fileName);
+		return fileManager.deleteFile(path, qnaFileVO);
+	}
+	
+	public String setSummerFile(MultipartFile files)throws Exception{
+		String fileName = fileManager.saveFile(files, path);
+		//우리가 파일을 HDD에 저장할때 요청되는 경로와, 파일을 불러올때 요청하는 url이 다르기 때문에
+		fileName = "/file/qna/" + fileName;
+		return fileName;
+	}
 
 	
 	public List<QnaVO> getList(Pager pager)throws Exception{

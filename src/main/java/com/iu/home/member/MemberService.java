@@ -12,8 +12,11 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.BodyInserters;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import lombok.extern.slf4j.Slf4j;
+import reactor.core.publisher.Mono;
 
 @Service
 @Transactional(rollbackFor = Exception.class)
@@ -21,19 +24,42 @@ import lombok.extern.slf4j.Slf4j;
 public class MemberService {
 	
 	@Value("${social.kakao.admin}")
-	private String adiminKey;
+	private String adminKey;
 	
 	@Autowired
 	private MemberMapper memberMapper;
 	
-	public int setDelete(MemberVO memberVO)throws Exception{
+	public int setDelete(MemberVO memberVO) throws Exception {
+	      //1. WebClient 생성
+	      WebClient webClient = WebClient.builder()
+	                              		 .baseUrl("https://kapi.kakao.com/")
+	                              		 .build();
+	      
+	      //2. parameter
+	      MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
+	      map.add("target_id_type", "user_id");
+	      map.add("target_id", memberVO.getId());
+	      
+	      Mono<String> res = webClient.post()
+	             .uri("v1/user/unlink")
+	             .body(BodyInserters.fromFormData(map))
+	             .header("Authorization","KakaoAK "+adminKey)
+	             .header("Content-Type: application/x-www-form-urlencoded")
+	             .retrieve()
+	             .bodyToMono(String.class);
+	      
+	      log.info("WebClientResult -> {}",res.block());
+	             return 1;
+	   }
+	
+	public int setDelete2(MemberVO memberVO)throws Exception{
 		int result =0;
 		RestTemplate restTemplate = new RestTemplate();
 		
 		//--Header
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED); //application/x-www-form-urlencoded
-		headers.add("Authorization","KakaoAK " + adiminKey);
+		headers.add("Authorization","KakaoAK " + adminKey);
 		
 		//--parameter
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();

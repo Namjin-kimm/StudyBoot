@@ -1,5 +1,6 @@
 package com.iu.home;
 
+import java.util.Calendar;
 import java.util.Enumeration;
 
 import javax.servlet.http.HttpSession;
@@ -19,11 +20,19 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
 
+import com.iu.home.board.qna.PostVO;
 import com.iu.home.board.qna.QnaMapper;
 import com.iu.home.member.MemberVO;
+import com.iu.home.util.TestInterface;
+
+import lombok.extern.slf4j.Slf4j;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @Controller
+@Slf4j
 public class HomeController {
 	
 	@Value("${my.restAPI.key}")
@@ -37,6 +46,13 @@ public class HomeController {
 	
 //	private final Logger log = LoggerFactory.getLogger(HomeController.class);
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
+	
+	@GetMapping("/arrow")
+	public void arrow() {
+		//Lamda식 JS Arrow Function)
+		TestInterface t = (m)->System.out.println(m);
+		t.info("test");
+	}
 	
 	@GetMapping("/user")
 	@ResponseBody
@@ -54,6 +70,32 @@ public class HomeController {
 	@ResponseBody
 	public String admin() {
 		return "Admin Role";
+	}
+	
+	@GetMapping("/web")
+	@ResponseBody
+	public String webClientTest() {
+		WebClient webClient = WebClient.builder()
+									   .baseUrl("https://jsonplaceholder.typicode.com/")
+									   .build();
+		Flux<PostVO> res = webClient.get()
+				 					.uri("posts")
+				 					.retrieve()
+				 					.bodyToFlux(PostVO.class);
+		PostVO postVO = res.blockFirst();
+		
+		//public void test(PostVO postVO){}
+		//a.test(postVO)
+		
+		res.subscribe((s)->{
+			PostVO pvo = s;
+			log.info("ID : {}", s.getId());
+		});
+		
+		
+		log.info("Result => {}", res);
+		
+		return "";
 	}
 	
 	@Autowired
@@ -120,9 +162,9 @@ public class HomeController {
 			//((MemberVO)context.getAuthentication().getPrincipal()).getId()
 		}
 		
-		log.info("message {}", message);
-		log.info("default {}", app);
-		log.info("====================");
+//		log.info("message {}", message);
+//		log.info("default {}", app);
+//		log.info("====================");
 		
 //		List<QnaVO> ar = qnaMapper.getList();
 		

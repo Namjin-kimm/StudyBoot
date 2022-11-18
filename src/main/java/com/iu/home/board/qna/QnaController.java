@@ -30,6 +30,21 @@ public class QnaController {
 	@Autowired
 	private QnaService qnaService;
 	
+	@PostMapping
+	@ResponseBody
+	public boolean summerFileDelete(String fileName)throws Exception{
+		log.info("FileName => {}", fileName);
+		return qnaService.summerFileDelete(fileName);
+	}
+	
+	@PostMapping("summerFile")
+	@ResponseBody
+	public String setSummerFile(MultipartFile files)throws Exception{
+		log.info("Files => {}", files);
+		String result = qnaService.setSummerFile(files);
+		return result;
+	}
+	
 	@GetMapping("hack")
 	@ResponseBody
 	public int hack (QnaVO qnaVO)throws Exception {
